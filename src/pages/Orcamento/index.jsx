@@ -50,13 +50,13 @@ export default function Orcamento() {
 
         if (selecionados.length === 0) return "Nenhum serviço selecionado.";
 
-        let texto = "*ORÇAMENTO DE SERVIÇOS*\n\n";
+        let texto = "*Orçamento:*\n\n";
         let total = 0;
 
         selecionados.forEach(s => {
             // Formata o número para o padrão brasileiro (ex: 10,00)
             const valorFormatado = s.valor.toFixed(2).replace('.', ',');
-            texto += `${s.nome}: R$ ${valorFormatado}\n`;
+            texto += ` ${s.nome}: R$ ${valorFormatado}\n`;
             total += s.valor; // Soma ao acumulador
         });
 
