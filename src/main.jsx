@@ -21,7 +21,7 @@ const router = createBrowserRouter([
     element: <Orcamento />,
   }
 ], {
-  basename: "/HubDespachanteAlpha"
+  basename: "/HubDespachanteAlpha/"
 })
 
 createRoot(document.getElementById('root')).render(
