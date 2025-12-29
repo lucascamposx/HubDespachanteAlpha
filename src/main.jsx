@@ -9,20 +9,20 @@ import Cadastro from './pages/Cadastro/index.jsx'
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/", // A raiz agora será entendida como /HubDespachanteAlpha/
     element: <Orcamento />,
   },
   {
-    path: "/cadastro",
+    path: "cadastro", // Sem a barra no início para ser relativa ao basename
     element: <Cadastro />,
   },
   {
-    path: "/orcamento",
+    path: "orcamento", // Sem a barra no início
     element: <Orcamento />,
   }
 ], {
-  basename: "/HubDespachanteAlpha/"
-})
+  basename: "/HubDespachanteAlpha" 
+});
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
