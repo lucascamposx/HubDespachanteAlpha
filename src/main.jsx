@@ -8,16 +8,21 @@ import Orcamento from './pages/Orcamento/index.jsx'
 import Cadastro from './pages/Cadastro/index.jsx'
 
 const router = createBrowserRouter([
-  {path: "/",
+  {
+    path: "/",
     element: <Orcamento />,
   },
-  {path: "/cadastro",
+  {
+    path: "/cadastro",
     element: <Cadastro />,
   },
-  {path: "/orcamento",
+  {
+    path: "/orcamento",
     element: <Orcamento />,
   }
-])
+], {
+  basename: "/HubDespachanteAlpha"
+})
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
