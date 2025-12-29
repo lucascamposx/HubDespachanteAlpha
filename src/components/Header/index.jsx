@@ -4,9 +4,8 @@ import styles from './Header.module.css';
 export default function Header() {
     return (
         <header className={styles.header}>
-            <Link className={styles.containerLogo}to={"/"}>
-            
-                <img className={styles.logo} src="./src/img/IconHubDespachante.png" alt="IconHubDespachante" />
+            <Link className={styles.containerLogo} to={"/"}>
+                <img className={styles.logo} src="/IconHubDespachante.png" alt="IconHubDespachante" />
                 <h1>HubDespachante</h1>
             </Link>
             <nav>
