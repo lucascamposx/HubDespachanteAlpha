@@ -1,0 +1,36 @@
+
+
+.header {
+    background-color: var(--primary-color);
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px;
+}
+
+.header h1{
+    color: #FFF;
+    font-weight: 400;
+    
+}
+
+.containerLogo{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo {
+    height: 50px;
+}
+
+.listaHeader {
+    display: flex;
+    gap: 10px;
+}
+
+.linkLista{
+    color: #FFF;
+    font-size: 1.4rem;
+}

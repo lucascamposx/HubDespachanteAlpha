@@ -1,0 +1,16 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    font-family: "Ubuntu", sans-serif;
+}
+
+:root {
+  --primary-color: #34638F; 
+}
+
+body {
+    background-color: #F3F7FB;
+}
