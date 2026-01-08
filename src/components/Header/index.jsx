@@ -5,7 +5,7 @@ export default function Header() {
     return (
         <header className={styles.header}>
             <Link className={styles.containerLogo} to={"/"}>
-                <img className={styles.logo} src="/IconHubDespachante.png" alt="IconHubDespachante" />
+                <img className={styles.logo} src="./img/IconHubDespachante.png" alt="IconHubDespachante" />
                 <h1>HubDespachante</h1>
             </Link>
             <nav>
