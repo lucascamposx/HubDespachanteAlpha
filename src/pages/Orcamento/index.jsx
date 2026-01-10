@@ -1,11 +1,11 @@
 import styles from "./Orcamento.module.css";
 import Header from "../../components/Header";
 import { useState } from 'react';
-
+import { useEffect } from "react";
 export default function Orcamento() {
     // Inicializamos o estado com a propriedade 'selecionado' para controlar o checkbox
     const [servicos, setServicos] = useState([
-        { nome: "Transferência", valor: 141.75, valorAprox: 142.00, selecionado: false },
+        { nome: "Transferência", valor: 141.75, valorAprox: 142.00, selecionado: false, valorOriginal: 0 },
         { nome: "Taxa ATPV", valor: 49.30, valorAprox: 50.00, selecionado: false },
         { nome: "Emissão ATPV", valor: 120.00, selecionado: false },
         { nome: "Segunda Via de CRV", valor: 118.69, valorAprox: 120.00, selecionado: false },
@@ -81,18 +81,13 @@ export default function Orcamento() {
         }
     };
 
+
+    const [valoresAproximados, setValoresAproximados] = useState(false);
+
     function setarValoresAproximados() {
-
-        const novosServicos = [...servicos];
-        novosServicos.forEach((s) => {
-
-        if (s.valorAprox > 0) {
-            s.valor = s.valorAprox;
-        }
-    });
-
-        setServicos(novosServicos);
+        setValoresAproximados(!valoresAproximados);
     }
+
 
     return (
         <div>
@@ -100,7 +95,7 @@ export default function Orcamento() {
             <form className={styles.formOrcamento}>
                 <h2>Orçamento de Serviços</h2>
 
-                <button type="button" onClick={setarValoresAproximados}>Usar valores Aproximados</button>
+                <button type="button" onClick={setarValoresAproximados}>{valoresAproximados ? "Usar valores originais" : "Usar valores aproximados"}</button>
 
                 {servicos.map((s, index) => (
                     <div key={index} className={styles.itemServico}>
@@ -116,7 +111,7 @@ export default function Orcamento() {
                         <input
                             type="number"
                             step="0.01"
-                            value={s.valor}
+                            value={valoresAproximados ? s.valorAprox : s.valor}
                             onChange={(e) => handleChange(index, e.target.value)}
                         />
                     </div>
