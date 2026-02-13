@@ -26,7 +26,7 @@ export default function Orcamento() {
         { nome: "Alteração de Motor", valor: 129.63, valorAprox: 130.00, selecionado: false },
         { nome: "R.Firma", valor: 250.00, selecionado: false },
         { nome: "R.Rasura", valor: 450.00, selecionado: false },
-        { nome: "Despachante", valor: 130.00, selecionado: false },
+        { nome: "Despachante", valor: 131.00, selecionado: false },
         { nome: "Despachante", valor: 150.00, selecionado: false },
         { nome: "Despachante", valor: 180.00, selecionado: false },
     ]);
@@ -48,27 +48,29 @@ export default function Orcamento() {
     };
 
     // Esta função "constrói" a mensagem de texto baseada no que está selecionado
-    const gerarTextoOrcamento = () => {
-        // Filtramos apenas os objetos que têm 'selecionado: true'
-        const selecionados = servicos.filter(s => s.selecionado);
+const gerarTextoOrcamento = () => {
+    const selecionados = servicos.filter(s => s.selecionado);
 
-        if (selecionados.length === 0) return "Nenhum serviço selecionado.";
+    if (selecionados.length === 0) return "Nenhum serviço selecionado.";
 
-        let texto = "*Orçamento:*\n\n";
-        let total = 0;
+    let texto = "*Orçamento:*\n\n";
+    let total = 0;
 
-        selecionados.forEach(s => {
-            // Formata o número para o padrão brasileiro (ex: 10,00)
-            const valorFormatado = s.valor.toFixed(2).replace('.', ',');
-            texto += ` ${s.nome}: R$ ${valorFormatado}\n`;
-            total += s.valor; // Soma ao acumulador
-        });
+    selecionados.forEach(s => {
+        // Lógica crucial: se valoresAproximados for true e existir valorAprox, use-o. 
+        // Caso contrário, use o valor padrão.
+        const valorEfetivo = (valoresAproximados && s.valorAprox !== undefined) 
+            ? s.valorAprox 
+            : (parseFloat(s.valor) || 0);
 
-        // Adiciona o total no final da string
-        texto += `\n*TOTAL: R$ ${total.toFixed(2).replace('.', ',')}*`;
-        return texto;
-    };
+        const valorFormatado = valorEfetivo.toFixed(2).replace('.', ',');
+        texto += ` ${s.nome}: R$ ${valorFormatado}\n`;
+        total += valorEfetivo; 
+    });
 
+    texto += `\n*TOTAL: R$ ${total.toFixed(2).replace('.', ',')}*`;
+    return texto;
+};
     // Função que envia o texto gerado para a área de transferência (Ctrl+V)
     const copiarParaClipboard = (e) => {
         e.preventDefault(); // Evita que o botão recarregue a página
