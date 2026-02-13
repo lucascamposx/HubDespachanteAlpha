@@ -39,13 +39,21 @@ export default function Orcamento() {
         setServicos(novosServicos);
     };
 
-    // Atualiza o valor numérico quando o usuário digita no input
-    const handleChange = (index, novoValor) => {
-        const novosServicos = [...servicos];
-        // O parseFloat garante que o valor seja tratado como número para o cálculo
-        novosServicos[index].valor = parseFloat(novoValor) || 0;
-        setServicos(novosServicos);
-    };
+// Atualiza o valor numérico quando o usuário digita no input
+const handleChange = (index, novoValor) => {
+    const novosServicos = [...servicos];
+    const valorNumerico = parseFloat(novoValor) || 0;
+
+    if (valoresAproximados) {
+        // Se o toggle de aproximados estiver ligado, editamos a propriedade valorAprox
+        novosServicos[index].valorAprox = valorNumerico;
+    } else {
+        // Caso contrário, editamos o valor original
+        novosServicos[index].valor = valorNumerico;
+    }
+
+    setServicos(novosServicos);
+};
 
     // Esta função "constrói" a mensagem de texto baseada no que está selecionado
 const gerarTextoOrcamento = () => {
