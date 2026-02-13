@@ -23,11 +23,12 @@ export default function Orcamento() {
         { nome: "IPVA", valor: "", selecionado: false },
         { nome: "Baixa de Gravame", valor: 129.63, valorAprox: 130.00, selecionado: false },
         { nome: "Inclusão de Gravame", valor: 129.63, valorAprox: 130.00, selecionado: false },
+        { nome: "Alteração de Motor", valor: 129.63, valorAprox: 130.00, selecionado: false },
         { nome: "R.Firma", valor: 250.00, selecionado: false },
         { nome: "R.Rasura", valor: 450.00, selecionado: false },
-        { nome: "Despachante", valor: 100.00, selecionado: false },
-        { nome: "Despachante", valor: 120.00, selecionado: false },
+        { nome: "Despachante", valor: 130.00, selecionado: false },
         { nome: "Despachante", valor: 150.00, selecionado: false },
+        { nome: "Despachante", valor: 180.00, selecionado: false },
     ]);
 
     // Alterna o estado do checkbox (marcado/desmarcado)
