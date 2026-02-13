@@ -7,7 +7,7 @@ export default function Orcamento() {
     const [servicos, setServicos] = useState([
         { nome: "Transferência", valor: 141.75, valorAprox: 142.00, selecionado: false, valorOriginal: 0 },
         { nome: "Taxa ATPV", valor: 49.30, valorAprox: 50.00, selecionado: false },
-        { nome: "Emissão ATPV", valor: 120.00, selecionado: false },
+        { nome: "Emissão ATPV", valor: 130.00, selecionado: false },
         { nome: "Segunda Via de CRV", valor: 118.69, valorAprox: 120.00, selecionado: false },
         { nome: "Autorização de Qualquer Natureza", valor: 49.30, valorAprox: 50.00, selecionado: false },
         { nome: "Vistoria Veiculo Leve", valor: 71.95, valorAprox: 72.00, selecionado: false },
