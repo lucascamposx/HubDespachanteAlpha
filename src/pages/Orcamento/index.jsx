@@ -26,7 +26,7 @@ export default function Orcamento() {
         { nome: "Alteração de Motor", valor: 129.63, valorAprox: 130.00, selecionado: false },
         { nome: "R.Firma", valor: 250.00, selecionado: false },
         { nome: "R.Rasura", valor: 450.00, selecionado: false },
-        { nome: "Despachante", valor: 131.00, selecionado: false },
+        { nome: "Despachante", valor: 130.00, selecionado: false },
         { nome: "Despachante", valor: 150.00, selecionado: false },
         { nome: "Despachante", valor: 180.00, selecionado: false },
     ]);
