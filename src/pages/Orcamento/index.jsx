@@ -2,7 +2,29 @@ import styles from "./Orcamento.module.css";
 import Header from "../../components/Header";
 import { useState } from 'react';
 import { useEffect } from "react";
+import React from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+
+
 export default function Orcamento() {
+    const notifySucess = (message) => toast.success(message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        newestOnTop: false,
+        closeOnClick: false,
+        rtl: false,
+    });
+    
+    const notifyError = (message) => toast.error(message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        newestOnTop: false,
+        closeOnClick: false,
+        rtl: false,
+    });
+
     // Inicializamos o estado com a propriedade 'selecionado' para controlar o checkbox
     const [servicos, setServicos] = useState([
         { nome: "Transferência", valor: 141.75, valorAprox: 142.00, selecionado: false, valorOriginal: 0 },
@@ -40,46 +62,46 @@ export default function Orcamento() {
         setServicos(novosServicos);
     };
 
-// Atualiza o valor numérico quando o usuário digita no input
-const handleChange = (index, novoValor) => {
-    const novosServicos = [...servicos];
-    const valorNumerico = parseFloat(novoValor) || 0;
+    // Atualiza o valor numérico quando o usuário digita no input
+    const handleChange = (index, novoValor) => {
+        const novosServicos = [...servicos];
+        const valorNumerico = parseFloat(novoValor) || 0;
 
-    if (valoresAproximados) {
-        // Se o toggle de aproximados estiver ligado, editamos a propriedade valorAprox
-        novosServicos[index].valorAprox = valorNumerico;
-    } else {
-        // Caso contrário, editamos o valor original
-        novosServicos[index].valor = valorNumerico;
-    }
+        if (valoresAproximados) {
+            // Se o toggle de aproximados estiver ligado, editamos a propriedade valorAprox
+            novosServicos[index].valorAprox = valorNumerico;
+        } else {
+            // Caso contrário, editamos o valor original
+            novosServicos[index].valor = valorNumerico;
+        }
 
-    setServicos(novosServicos);
-};
+        setServicos(novosServicos);
+    };
 
     // Esta função "constrói" a mensagem de texto baseada no que está selecionado
-const gerarTextoOrcamento = () => {
-    const selecionados = servicos.filter(s => s.selecionado);
+    const gerarTextoOrcamento = () => {
+        const selecionados = servicos.filter(s => s.selecionado);
 
-    if (selecionados.length === 0) return "Nenhum serviço selecionado.";
+        if (selecionados.length === 0) return "Nenhum serviço selecionado.";
 
-    let texto = "*Orçamento:*\n\n";
-    let total = 0;
+        let texto = "*Orçamento:*\n\n";
+        let total = 0;
 
-    selecionados.forEach(s => {
-        // Lógica crucial: se valoresAproximados for true e existir valorAprox, use-o. 
-        // Caso contrário, use o valor padrão.
-        const valorEfetivo = (valoresAproximados && s.valorAprox !== undefined) 
-            ? s.valorAprox 
-            : (parseFloat(s.valor) || 0);
+        selecionados.forEach(s => {
+            // Lógica crucial: se valoresAproximados for true e existir valorAprox, use-o. 
+            // Caso contrário, use o valor padrão.
+            const valorEfetivo = (valoresAproximados && s.valorAprox !== undefined)
+                ? s.valorAprox
+                : (parseFloat(s.valor) || 0);
 
-        const valorFormatado = valorEfetivo.toFixed(2).replace('.', ',');
-        texto += ` ${s.nome}: R$ ${valorFormatado}\n`;
-        total += valorEfetivo; 
-    });
+            const valorFormatado = valorEfetivo.toFixed(2).replace('.', ',');
+            texto += ` ${s.nome}: R$ ${valorFormatado}\n`;
+            total += valorEfetivo;
+        });
 
-    texto += `\n*TOTAL: R$ ${total.toFixed(2).replace('.', ',')}*`;
-    return texto;
-};
+        texto += `\n*TOTAL: R$ ${total.toFixed(2).replace('.', ',')}*`;
+        return texto;
+    };
     // Função que envia o texto gerado para a área de transferência (Ctrl+V)
     const copiarParaClipboard = (e) => {
         e.preventDefault(); // Evita que o botão recarregue a página
@@ -88,9 +110,11 @@ const gerarTextoOrcamento = () => {
         // Navigator é uma API nativa do navegador para lidar com o sistema
         if (navigator.clipboard) {
             navigator.clipboard.writeText(texto)
-                .then(() => alert("Copiado com sucesso!"))
-                .catch(err => alert("Erro ao copiar: " + err));
+                .then(() => notifySucess("Copiado com sucesso!"))
+                .catch(err => notifyError("Erro ao copiar: " + err));
+
         }
+
     };
 
 
@@ -123,7 +147,7 @@ const gerarTextoOrcamento = () => {
                         <input
                             type="number"
                             step="any"
-                            value={s.valorAprox? (valoresAproximados ? s.valorAprox : s.valor) : s.valor}
+                            value={s.valorAprox ? (valoresAproximados ? s.valorAprox : s.valor) : s.valor}
                             onChange={(e) => handleChange(index, e.target.value)}
                         />
                     </div>
@@ -138,7 +162,7 @@ const gerarTextoOrcamento = () => {
                 />
 
                 <button
-                    type="button" 
+                    type="button"
                     onClick={copiarParaClipboard}
                 >
                     Copiar para WhatsApp
