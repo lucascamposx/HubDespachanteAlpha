@@ -17,14 +17,15 @@ export default function Orcamento() {
         { nome: "Ordem de Placa", valor: 49.30, valorAprox: 50.00, selecionado: false },
         { nome: "Placa Unica", valor: 210.00, selecionado: false },
         { nome: "Par de Placa", valor: 310.00, selecionado: false },
-        { nome: "Laudo Pericial", valor: 470.00, selecionado: false },
+        { nome: "Roubos e Furtos", valor: 470.00, selecionado: false },
         { nome: "Alteração de Categoria", valor: 129.63, valorAprox: 130.00, selecionado: false },
         { nome: "Primeiro emplacamento", valor: 234.25, valorAprox: 235.00, selecionado: false },
         { nome: "IPVA", valor: "", selecionado: false },
         { nome: "Baixa de Gravame", valor: 129.63, valorAprox: 130.00, selecionado: false },
         { nome: "Inclusão de Gravame", valor: 129.63, valorAprox: 130.00, selecionado: false },
         { nome: "Alteração de Motor", valor: 129.63, valorAprox: 130.00, selecionado: false },
-        { nome: "R.Firma", valor: 250.00, selecionado: false },
+        { nome: "Alteração de Dados", valor: 129.63, valorAprox: 130.00, selecionado: false },
+        { nome: "Firma Certidao Cartorio", valor: 250.00, selecionado: false },
         { nome: "R.Rasura", valor: 450.00, selecionado: false },
         { nome: "Despachante", valor: 130.00, selecionado: false },
         { nome: "Despachante", valor: 150.00, selecionado: false },
@@ -93,7 +94,7 @@ const gerarTextoOrcamento = () => {
     };
 
 
-    const [valoresAproximados, setValoresAproximados] = useState(false);
+    const [valoresAproximados, setValoresAproximados] = useState(true);
 
     function setarValoresAproximados() {
         setValoresAproximados(!valoresAproximados);
@@ -121,8 +122,8 @@ const gerarTextoOrcamento = () => {
                         </label>
                         <input
                             type="number"
-                            step="0.01"
-                            value={valoresAproximados ? s.valorAprox : s.valor}
+                            step="any"
+                            value={s.valorAprox? (valoresAproximados ? s.valorAprox : s.valor) : s.valor}
                             onChange={(e) => handleChange(index, e.target.value)}
                         />
                     </div>
@@ -131,13 +132,13 @@ const gerarTextoOrcamento = () => {
                 {/* Textarea para visualização prévia do que será copiado */}
                 <textarea
                     className={styles.previewOrcamento}
-                    readOnly // O usuário não digita aqui, ele apenas vê o resultado
                     value={gerarTextoOrcamento()}
+                    readOnly
                     rows={8}
                 />
 
                 <button
-                    type="button" // Importante: type button não envia o formulário
+                    type="button" 
                     onClick={copiarParaClipboard}
                 >
                     Copiar para WhatsApp
