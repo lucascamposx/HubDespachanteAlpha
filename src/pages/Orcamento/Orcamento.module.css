@@ -112,6 +112,7 @@ input[type="number"]::-webkit-inner-spin-button {
     transform: scale(0.98);
 }
 
+
 /* Responsividade */
 @media (max-width: 600px) {
     .itemServico {

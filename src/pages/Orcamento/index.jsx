@@ -2,11 +2,12 @@ import styles from "./Orcamento.module.css";
 import Header from "../../components/Header";
 import { useState } from 'react';
 import { useEffect } from "react";
-import React from 'react';
 import { ToastContainer, toast } from 'react-toastify';
-
+import Switch from "../../components/Switch/Switch";
 
 export default function Orcamento() {
+
+
     const notifySucess = (message) => toast.success(message, {
         position: "top-right",
         autoClose: 5000,
@@ -15,7 +16,7 @@ export default function Orcamento() {
         closeOnClick: false,
         rtl: false,
     });
-    
+
     const notifyError = (message) => toast.error(message, {
         position: "top-right",
         autoClose: 5000,
@@ -99,7 +100,7 @@ export default function Orcamento() {
             total += valorEfetivo;
         });
 
-        texto += `\n*TOTAL: R$ ${total.toFixed(2).replace('.', ',')}*`;
+        texto += `\n*TOTAL: R$ ${total.toFixed(2).replace('.', ',')}* ${pix? "\n\nPara realizar o pagamento, segue a chave PIX:\n💳 *CPF:* 027.117.514-14\n👤 *Nome:* José André de França Bezerra\n🏦 *Banco:* Caixa Econômica Federal\n\nApós efetuar o pagamento, por favor envie o comprovante aqui. ✅" : ""}*`;
         return texto;
     };
     // Função que envia o texto gerado para a área de transferência (Ctrl+V)
@@ -119,6 +120,7 @@ export default function Orcamento() {
 
 
     const [valoresAproximados, setValoresAproximados] = useState(true);
+    const [pix, setPix] = useState(true);
 
     function setarValoresAproximados() {
         setValoresAproximados(!valoresAproximados);
@@ -131,7 +133,20 @@ export default function Orcamento() {
             <form className={styles.formOrcamento}>
                 <h2>Orçamento de Serviços</h2>
 
-                <button type="button" onClick={setarValoresAproximados}>{valoresAproximados ? "Usar valores originais" : "Usar valores aproximados"}</button>
+                {/* <button type="button" onClick={setarValoresAproximados}>{valoresAproximados ? "Usar valores originais" : "Usar valores aproximados"}</button> */}
+
+                <Switch
+                    className={styles.switchAproximados}
+                    label="Mostar valores aproximados"
+                    checked={valoresAproximados}
+                    onChange={(checked) => setValoresAproximados(checked)}
+                />
+                <Switch
+                    className={styles.switchAproximados}
+                    label="Adicionar Pix"
+                    checked={pix}
+                    onChange={(checked) => setPix(checked)}
+                />
 
                 {servicos.map((s, index) => (
                     <div key={index} className={styles.itemServico}>
