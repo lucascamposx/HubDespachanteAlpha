@@ -85,7 +85,7 @@ export default function Orcamento() {
 
         if (selecionados.length === 0) return "Nenhum serviço selecionado.";
 
-        let texto = "*Orçamento:*\n\n";
+        let texto = `*Orçamento${marcaModelo ? ` ${marcaModelo.toUpperCase()}` : ""}${placa ? ` ${placa.toUpperCase()}` : ""}:*\n\n`;
         let total = 0;
 
         selecionados.forEach(s => {
@@ -100,7 +100,7 @@ export default function Orcamento() {
             total += valorEfetivo;
         });
 
-        texto += `\n*TOTAL: R$ ${total.toFixed(2).replace('.', ',')}* ${pix? "\n\nPara realizar o pagamento, segue a chave PIX:\n💳 *CPF:* 027.117.514-14\n👤 *Nome:* José André de França Bezerra\n🏦 *Banco:* Caixa Econômica Federal\n\nApós efetuar o pagamento, por favor envie o comprovante aqui. ✅" : ""}*`;
+        texto += `\n*TOTAL: R$ ${total.toFixed(2).replace('.', ',')}* ${pix ? "\n\nPara realizar o pagamento, segue a chave PIX:\n💳 *CPF:* 027.117.514-14\n👤 *Nome:* José André de França Bezerra\n🏦 *Banco:* Caixa Econômica Federal\n\nApós efetuar o pagamento, por favor envie o comprovante aqui. ✅" : ""}*`;
         return texto;
     };
     // Função que envia o texto gerado para a área de transferência (Ctrl+V)
@@ -122,6 +122,9 @@ export default function Orcamento() {
     const [valoresAproximados, setValoresAproximados] = useState(true);
     const [pix, setPix] = useState(true);
 
+    const [marcaModelo, setmarcaModelo] = useState("");
+    const [placa, setPlaca] = useState("");
+
     function setarValoresAproximados() {
         setValoresAproximados(!valoresAproximados);
     }
@@ -135,18 +138,38 @@ export default function Orcamento() {
 
                 {/* <button type="button" onClick={setarValoresAproximados}>{valoresAproximados ? "Usar valores originais" : "Usar valores aproximados"}</button> */}
 
-                <Switch
-                    className={styles.switchAproximados}
-                    label="Mostar valores aproximados"
-                    checked={valoresAproximados}
-                    onChange={(checked) => setValoresAproximados(checked)}
-                />
-                <Switch
-                    className={styles.switchAproximados}
-                    label="Adicionar Pix"
-                    checked={pix}
-                    onChange={(checked) => setPix(checked)}
-                />
+                <div className={styles.containerInputs}>
+                    <input
+                        type="text"
+                        placeholder="Marca / Modelo"
+                        value={marcaModelo}
+                        onChange={(e) => setmarcaModelo(e.target.value.toUpperCase())}
+                    />
+
+                    <input
+                        type="text"
+                        placeholder="Placa"
+                        value={placa}
+                        maxLength={7}
+                        onChange={(e) => setPlaca(e.target.value.toUpperCase().slice(0, 7))}
+                    />
+                </div>
+
+                <div className={styles.containerSwitches}>
+                    <Switch
+                        className={styles.switchAproximados}
+                        label="Mostar valores aproximados"
+                        checked={valoresAproximados}
+                        onChange={(checked) => setValoresAproximados(checked)}
+                    />
+                    <Switch
+                        className={styles.switchAproximados}
+                        label="Adicionar Pix"
+                        checked={pix}
+                        onChange={(checked) => setPix(checked)}
+                    />
+                </div>
+
 
                 {servicos.map((s, index) => (
                     <div key={index} className={styles.itemServico}>
