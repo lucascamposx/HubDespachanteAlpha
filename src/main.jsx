@@ -8,6 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import Home from './pages/Home/index.jsx'
 import Orcamento from './pages/Orcamento/index.jsx'
 import Cadastro from './pages/Cadastro/index.jsx'
+import ProcuracaoPage from './pages/ProcuracaoPage/index.jsx';
 
 const router = createBrowserRouter([
   {
@@ -15,11 +16,11 @@ const router = createBrowserRouter([
     element: <Orcamento />,
   },
   {
-    path: "cadastro", // Sem a barra no início para ser relativa ao basename
-    element: <Cadastro />,
+    path: "/procuracao",
+    element: <ProcuracaoPage />,
   },
   {
-    path: "orcamento", // Sem a barra no início
+    path: "/orcamento", 
     element: <Orcamento />,
   }
 ], {

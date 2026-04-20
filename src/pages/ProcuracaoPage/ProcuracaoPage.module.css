@@ -1,0 +1,65 @@
+.containerForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #FFF;
+    padding: 20px;
+    max-width: 1400px;
+    margin: 20px auto;
+    border-radius: 8px;
+}
+
+.rowForm{
+    display: flex;
+    width: 100%;
+    gap: 20px;
+}
+
+.inputGroup{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.inputGroup label{
+    font-size: 14px;
+    font-weight: 500;
+    color: #000C2B;
+}
+.inputGroup input, .inputGroup select{
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    color: #333;
+}
+
+.inputGroup input:focus, .inputGroup select:focus{
+    border-color: #007bff;
+}
+.inputGroup select{
+    cursor: pointer;
+    
+}
+.flex1{
+    flex: 1;
+}
+
+.flex2{
+    flex: 2;
+}
+
+.textDescServicos{
+    width: 100%;
+    min-height: 100px;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    resize: vertical;
+    color: #333;
+}
+
+.textDescServicos:focus{
+    border-color: #007bff;
+}

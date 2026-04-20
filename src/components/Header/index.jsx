@@ -10,7 +10,7 @@ export default function Header() {
                 <h1>HubDespachante</h1>
             </Link>
             <nav>
-                {/* <ul className={styles.listaHeader}>
+                <ul className={styles.listaHeader}>
                     <li>
                         <Link className={styles.linkLista}
                         to={"/"}
@@ -20,9 +20,9 @@ export default function Header() {
                         <Link className={styles.linkLista} to={"/orcamento"}>Orçamento</Link>
                     </li>
                     <li>
-                        <Link className={styles.linkLista}>Documentos</Link>
+                        <Link className={styles.linkLista} to={"/procuracao"}>Procuracao</Link>
                     </li>
-                </ul> */}
+                </ul>
             </nav>
         </header>
     )
